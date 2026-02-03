@@ -1,35 +1,36 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import React from 'react';
+import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+import Register from './pages/Register';
+import Login from './pages/Login';
 
 function App() {
-  const [count, setCount] = useState(0)
-
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
+    <Router>
+      <div style={{ fontFamily: 'Arial, sans-serif' }}>
+        {/* Navigation Bar */}
+        <nav style={{ padding: '15px', background: '#222', color: '#fff', display: 'flex', gap: '20px' }}>
+          <Link to="/" style={{ color: '#fff', textDecoration: 'none', fontWeight: 'bold' }}>Home</Link>
+          <Link to="/login" style={{ color: '#fff', textDecoration: 'none' }}>Login</Link>
+          <Link to="/register" style={{ color: '#fff', textDecoration: 'none' }}>Register</Link>
+        </nav>
+
+        {/* Page Routing */}
+        <div style={{ padding: '20px' }}>
+          <Routes>
+            <Route path="/" element={
+              <div style={{ textAlign: 'center', marginTop: '50px' }}>
+                <h1>Construction ERP Portal</h1>
+                <p>Welcome! Use the links above to get started.</p>
+              </div>
+            } />
+            <Route path="/register" element={<Register />} />
+            <Route path="/login" element={<Login />} />
+            {/* We will add the Dashboard route here next */}
+          </Routes>
+        </div>
       </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
+    </Router>
+  );
 }
 
-export default App
+export default App;
